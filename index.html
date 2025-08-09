@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Devanshu Jangid — Aspiring Data Engineer</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ----------------------------------------------------------------
+       Theme variables (kept same as your original theme)
+       ---------------------------------------------------------------- */
+    :root{
+      --bg1: #1a1a2e;
+      --bg2: #16213e;
+      --accent: #e94560;
+      --accent-light: #ff7b8f;
+      --gold: #ffd700;
+      --text: #f1f1f1;
+      --muted: #b8b8b8;
+      --card: rgba(25, 25, 50, 0.6);
+      --glass: rgba(255,255,255,0.04);
+      --glass-strong: rgba(255,255,255,0.08);
+      --max-width: 1100px;
+    }
+
+    /* ----------------------------------------------------------------
+       Reset & base
+       ---------------------------------------------------------------- */
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    html{ scroll-behavior:smooth; font-size:16px; }
+    body{
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg,var(--bg1) 0%, #0f1020 120%);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    h1,h2,h3,h4{
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
+      letter-spacing: 0.4px;
+    }
+
+    a{ color: inherit; text-decoration: none; }
+
+    .container {
+      width: calc(100% - 4rem);
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    /* ----------------------------------------------------------------
+       HEADER (kept styling & scroll behaviour)
+       ---------------------------------------------------------------- */
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      padding: 20px 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 10, 30, 0.9);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: all 0.4s ease;
+    }
+    header.scrolled { padding: 10px 2rem; background: rgba(6,6,12,0.98); }
+
+    .logo { display:flex; align-items:center; gap:12px; }
+    .logo-dot { width:12px; height:12px; border-radius:50%; background:var(--accent); box-shadow:0 0 15px var(--accent); }
+    .logo-text{
+      font-weight:700;
+      font-size:1.05rem;
+      background: linear-gradient(90deg,var(--accent),var(--accent-light));
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+    }
+
+    nav.primary {
+      display:flex; gap:20px; align-items:center;
+    }
+    nav.primary a {
+      color:var(--text); opacity:0.9; font-weight:500; padding:8px 6px; position:relative;
+    }
+    nav.primary a::after {
+      content:''; position:absolute; left:0; bottom:0; width:0; height:2px; background:var(--accent); transition: width .25s;
+    }
+    nav.primary a:hover{ color:var(--accent-light); opacity:1; }
+    nav.primary a:hover::after{ width:100%; }
+
+    /* mobile nav toggle */
+    .mobile-toggle {
+      display:none;
+      background:transparent; border:1px solid rgba(255,255,255,0.06);
+      padding:8px 10px; border-radius:10px; cursor:pointer;
+      color:var(--text);
+    }
+
+    /* ----------------------------------------------------------------
+       Hero section (theme & animations preserved)
+       ---------------------------------------------------------------- */
+    .section {
+      min-height: 100vh;
+      padding: 120px 0 80px;
+      display:flex; align-items:center;
+    }
+    .hero {
+      background: linear-gradient(rgba(10,10,30,0.7), rgba(5,5,15,0.9)),
+        url('https://images.unsplash.com/photo-1639762681057-408e52192e55?q=80&w=2232&auto=format&fit=crop') center/cover fixed;
+      text-align:center; flex-direction:column; justify-content:center;
+      padding-top:140px;
+    }
+    .hero .hero-inner{
+      width:calc(100% - 4rem);
+      max-width:920px; margin:0 auto;
+      backdrop-filter: blur(2px);
+      padding:30px;
+      border-radius:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .hero h1 { font-size:3.6rem; margin-bottom:10px; line-height:1.05; }
+    .hero h1 span { color:var(--accent); }
+    .hero p { font-size:1.1rem; margin-bottom:18px; color:rgba(241,241,241,0.95); }
+
+    .hero-badge {
+      display:inline-block; background: rgba(233,69,96,0.12);
+      color: var(--accent-light);
+      padding:8px 18px; border-radius:999px; font-weight:600; margin-bottom:20px;
+      border:1px solid rgba(233,69,96,0.16);
+    }
+
+    .cta-row { display:flex; justify-content:center; gap:18px; margin-top:18px; flex-wrap:wrap; }
+    .btn {
+      padding:12px 26px; border-radius:50px; font-weight:600; cursor:pointer; display:inline-block;
+      transition: all .3s ease;
+    }
+    .btn-primary { background:var(--accent); color:white; box-shadow: 0 8px 28px rgba(233,69,96,0.28); }
+    .btn-primary:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(233,69,96,0.38); }
+    .btn-outline { border:2px solid var(--accent); color:var(--accent); background:transparent; padding:10px 24px; }
+    .btn-outline:hover { background:var(--accent); color:white; }
+
+    /* ----------------------------------------------------------------
+       Text slider (kept same animation)
+       ---------------------------------------------------------------- */
+    .text-slider { height:80px; overflow:hidden; margin:18px 0; }
+    .slider-content { animation: slide 12s infinite; }
+    .slider-item {
+      height:80px; display:flex; align-items:center; justify-content:center; font-size:1.35rem; font-weight:700;
+    }
+    @keyframes slide {
+      0%,20%{ transform: translateY(0); }
+      25%,45%{ transform: translateY(-80px); }
+      50%,70%{ transform: translateY(-160px); }
+      75%,95%{ transform: translateY(-240px); }
+      100%{ transform: translateY(-320px); }
+    }
+
+    /* ----------------------------------------------------------------
+       Card components, grids
+       ---------------------------------------------------------------- */
+    .grid { display:grid; gap:24px; }
+    .two-col { grid-template-columns: 1fr 1fr; }
+    .three-col { grid-template-columns: repeat(3,1fr); }
+
+    .card {
+      background: var(--card);
+      padding:22px; border-radius:12px;
+      border:1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+      transition: transform .35s ease, border-color .35s ease;
+    }
+    .card:hover { transform: translateY(-8px); border-color: rgba(233,69,96,0.28); }
+
+    .small { font-size:0.9rem; color:var(--muted); }
+
+    /* ----------------------------------------------------------------
+       About section (expanded)
+       ---------------------------------------------------------------- */
+    .about {
+      padding-top: 90px; padding-bottom: 90px;
+      background: linear-gradient(180deg, rgba(22,33,62,0.2), rgba(10,12,25,0.1));
+    }
+    .about .profile {
+      display:flex; gap:28px; align-items:center;
+    }
+    .avatar {
+      width:160px;height:160px;border-radius:14px; overflow:hidden; flex-shrink:0;
+      border:1px solid rgba(255,255,255,0.04);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.6);
+    }
+    .avatar img { width:100%; height:100%; object-fit:cover; display:block; }
+
+    .about .bio h3 { margin-bottom:6px; color:var(--accent-light); }
+    .about .bio p { margin-bottom:12px; color:rgba(241,241,241,0.93); }
+
+    .stats {
+      display:flex; gap:18px; margin-top:14px; flex-wrap:wrap;
+    }
+    .stat {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:12px 16px; border-radius:10px; font-weight:600;
+      border:1px solid rgba(255,255,255,0.02);
+    }
+
+    /* ----------------------------------------------------------------
+       Skills section (progress bars & interactive)
+       ---------------------------------------------------------------- */
+    .skills {
+      padding:90px 0;
+    }
+    .skills-grid { display:grid; grid-template-columns: 1fr 1fr; gap:28px; align-items:center; }
+    .skill-list { display:flex; flex-direction:column; gap:16px; }
+    .skill-item { display:flex; align-items:center; gap:14px; }
+    .skill-item .meta { width:120px; font-weight:600; color:var(--muted); }
+    .progress {
+      flex:1; height:12px; background: rgba(255,255,255,0.05); border-radius:999px; position:relative; overflow:hidden;
+      border:1px solid rgba(255,255,255,0.02);
+    }
+    .progress > i { position:absolute; left:0; top:0; bottom:0; width:0%; transition: width 1.4s cubic-bezier(.2,.9,.3,1); background: linear-gradient(90deg,var(--accent),var(--accent-light)); }
+
+    /* skill counters (animated) */
+    .counters { display:flex; gap:18px; justify-content:center; margin-top:18px; flex-wrap:wrap; }
+    .counter {
+      background:var(--glass); padding:14px 18px; border-radius:10px; text-align:center;
+      min-width:120px; border:1px solid rgba(255,255,255,0.02);
+    }
+    .counter .value { font-size:1.5rem; font-weight:700; color:var(--accent); }
+
+    /* ----------------------------------------------------------------
+       Projects section (cards, filters)
+       ---------------------------------------------------------------- */
+    .projects { padding:90px 0; }
+    .projects-filters { display:flex; gap:12px; justify-content:center; margin-bottom:24px; flex-wrap:wrap; }
+    .filter-btn { padding:8px 12px; border-radius:999px; background:var(--glass); border:1px solid rgba(255,255,255,0.03); cursor:pointer; }
+    .project-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:20px; }
+    .project-card { position:relative; overflow:hidden; }
+    .project-cover { height:180px; background-size:cover; background-position:center; border-radius:10px; }
+
+    .project-content { padding:14px; }
+    .project-tags { display:flex; gap:8px; flex-wrap:wrap; margin-top:8px; }
+    .tag { font-size:0.8rem; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,0.04); }
+
+    /* project modal */
+    .modal {
+      position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+      background: rgba(5,5,10,0.7); z-index:2000; padding:24px;
+    }
+    .modal.active { display:flex; }
+    .modal-card {
+      width:100%; max-width:900px; background:var(--card); padding:20px; border-radius:12px;
+      border:1px solid rgba(255,255,255,0.04); box-shadow:0 30px 80px rgba(0,0,0,0.7);
+    }
+    .modal-close { float:right; cursor:pointer; font-weight:700; color:var(--muted); }
+
+    /* ----------------------------------------------------------------
+       Achievements & Certificates (certificate gallery links to Drive)
+       ---------------------------------------------------------------- */
+    .achievements { padding:80px 0; background: linear-gradient(180deg, rgba(18,22,40,0.2), rgba(8,8,12,0.05)); }
+    .achievements-grid { display:grid; grid-template-columns: repeat(2,1fr); gap:20px; }
+    .certificate-list { display:flex; flex-direction:column; gap:12px; }
+    .cert-item { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:12px; border-radius:10px; background:var(--glass); border:1px solid rgba(255,255,255,0.02); }
+    .cert-btn { padding:8px 12px; border-radius:8px; background:transparent; border:1px solid rgba(233,69,96,0.12); color:var(--accent-light); cursor:pointer; }
+
+    /* certificate embed hint */
+    .embed-hint { font-size:0.9rem; color:var(--muted); margin-top:8px; }
+
+    /* ----------------------------------------------------------------
+       Timeline (learning journey)
+       ---------------------------------------------------------------- */
+    .timeline { padding:70px 0; }
+    .timeline-list { position:relative; padding-left:40px; }
+    .timeline-list::before {
+      content:''; position:absolute; left:8px; top:0; bottom:0; width:4px; background:linear-gradient(180deg,var(--accent),var(--accent-light)); border-radius:10px;
+      opacity:0.14;
+    }
+    .timeline-item { position:relative; margin-bottom:28px; padding:10px 16px; background:var(--glass); border-radius:10px; border:1px solid rgba(255,255,255,0.02); }
+    .timeline-item .dot { position:absolute; left:-24px; top:12px; width:16px; height:16px; border-radius:50%; background:var(--bg1); border:3px solid var(--accent); }
+
+    /* ----------------------------------------------------------------
+       Testimonials
+       ---------------------------------------------------------------- */
+    .testimonials { padding:70px 0; }
+    .test-grid { display:grid; grid-template-columns: repeat(3,1fr); gap:18px; }
+    .testimonial { padding:18px; border-radius:12px; background:var(--card); border:1px solid rgba(255,255,255,0.02); }
+
+    /* ----------------------------------------------------------------
+       Contact section
+       ---------------------------------------------------------------- */
+    .contact { padding:80px 0; }
+    .contact-grid { display:grid; grid-template-columns: 1fr 1fr; gap:28px; align-items:start; }
+    .contact-form label { display:block; margin-bottom:8px; font-weight:600; font-size:0.95rem; }
+    .input, textarea {
+      width:100%; padding:12px 14px; border-radius:10px; background:transparent; border:1px solid rgba(255,255,255,0.06);
+      color:var(--text); outline:none; margin-bottom:12px;
+    }
+    textarea { min-height:140px; resize:vertical; }
+    .copy-email { cursor:pointer; padding:8px 12px; border-radius:8px; border:1px solid rgba(255,255,255,0.03); background:var(--glass); }
+
+    /* footer */
+    footer { padding:36px 0; text-align:center; background: rgba(5,5,15,0.9); border-top:1px solid rgba(255,255,255,0.02); }
+
+    /* reveal animation helper (kept) */
+    .reveal { opacity:0; transform: translateY(20px); transition: all .8s cubic-bezier(.2,.9,.3,1); }
+    .reveal.active { opacity:1; transform: translateY(0); }
+
+    /* responsive */
+    @media (max-width: 1000px) {
+      .project-grid { grid-template-columns: repeat(2,1fr); }
+      .three-col { grid-template-columns: repeat(2,1fr); }
+      .test-grid { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 768px) {
+      nav.primary { display:none; }
+      .mobile-toggle { display:inline-block; }
+      .two-col { grid-template-columns: 1fr; }
+      .hero h1 { font-size:2.4rem; }
+      .project-grid { grid-template-columns: 1fr; }
+      .test-grid { grid-template-columns: 1fr; }
+      .about .profile { flex-direction: column; text-align:center; }
+      .about .bio { text-align:left; }
+    }
+
+    /* small helper classes */
+    .muted { color:var(--muted); }
+    .center { text-align:center; }
+    .spacer { height:18px; }
+
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header id="header" role="banner">
+    <div class="container" style="display:flex; align-items:center; justify-content:space-between;">
+      <div class="logo" aria-hidden="true">
+        <div class="logo-dot"></div>
+        <div class="logo-text">Devanshu Jangid</div>
+      </div>
+
+      <nav class="primary" role="navigation" aria-label="Primary navigation">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#achievements">Certificates</a>
+        <a href="#contact">Contact</a>
+      </nav>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-expanded="false" aria-controls="mobileMenu">Menu</button>
+    </div>
+  </header>
+
+  <!-- MOBILE NAV (hidden on desktop) -->
+  <div id="mobileMenu" style="display:none; position:fixed; inset:0; z-index:1200; background: rgba(8,9,18,0.95); padding:40px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:24px;">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div class="logo-dot" style="width:14px;height:14px;"></div>
+        <div style="font-weight:700; font-size:1.1rem;">Devanshu Jangid</div>
+      </div>
+      <button id="mobileClose" style="background:transparent; border:none; color:var(--muted); font-size:1rem; cursor:pointer;">Close ✕</button>
+    </div>
+
+    <nav style="display:flex; flex-direction:column; gap:14px;">
+      <a href="#home" class="mobile-link">Home</a>
+      <a href="#about" class="mobile-link">About</a>
+      <a href="#skills" class="mobile-link">Skills</a>
+      <a href="#projects" class="mobile-link">Projects</a>
+      <a href="#achievements" class="mobile-link">Certificates</a>
+      <a href="#contact" class="mobile-link">Contact</a>
+    </nav>
+  </div>
+
+  <!-- HERO -->
+  <section id="home" class="section hero" aria-label="Introduction">
+    <div class="container hero-inner reveal" style="--delay:0s;">
+      <div class="hero-badge">Aspiring Data Engineer</div>
+      <h1>Hi, I'm <span>Devanshu Jangid</span></h1>
+      <p>Learning Data Engineering fundamentals — ETL, SQL, data pipelines and cloud basics. Also exploring RPA to understand process automation.</p>
+
+      <div class="text-slider" aria-hidden="true">
+        <div class="slider-content">
+          <div class="slider-item">Learning Data Engineering</div>
+          <div class="slider-item">Learning RPA Tools</div>
+          <div class="slider-item">SQL & Database Concepts</div>
+          <div class="slider-item">Building Data Pipelines</div>
+        </div>
+      </div>
+
+      <div class="cta-row">
+        <a href="#projects" class="btn btn-primary">See Projects</a>
+        <a href="#achievements" class="btn btn-outline">View Certificates</a>
+      </div>
+
+      <div class="spacer"></div>
+
+      <!-- Quick contact -->
+      <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+        <button class="copy-email" id="copyEmailBtn" title="Copy email to clipboard">Copy Email</button>
+        <a href="mailto:devanshujangid160@gmail.com" class="btn btn-outline">Email Me</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="section about" aria-labelledby="aboutTitle">
+    <div class="container">
+      <h2 id="aboutTitle" class="section-title reveal">About Me</h2>
+
+      <div class="card profile reveal" style="display:flex; gap:28px; align-items:center; padding:22px;">
+        <div class="avatar" aria-hidden="true">
+          <img src="https://images.unsplash.com/photo-1579389083078-4e7018379f7e?q=80&w=2070&auto=format&fit=crop" alt="Profile photo">
+        </div>
+
+        <div class="bio">
+          <h3>On my journey to Data Engineering</h3>
+          <p>I am currently learning the core concepts required to become a Data Engineer: data modelling, ETL/ELT pipelines, SQL, and cloud basics. I am also exploring automation with RPA to better understand process-driven data scenarios.</p>
+
+          <p>I do not claim to be a professional Python or Java developer — I am learning these languages for data engineering use-cases and scripting. My priority is to build strong fundamentals in data pipelines, databases, and tooling used in production.</p>
+
+          <div class="stats" role="list">
+            <div class="stat" role="listitem"><div class="small muted">Learning Focus</div><div><strong>ETL & SQL</strong></div></div>
+            <div class="stat" role="listitem"><div class="small muted">Automation</div><div><strong>RPA (learning)</strong></div></div>
+            <div class="stat" role="listitem"><div class="small muted">Languages</div><div><strong>Learning: Python, Java</strong></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="spacer"></div>
+
+      <!-- timeline quick -->
+      <div class="card reveal">
+        <h3>Learning Timeline</h3>
+        <div class="timeline-list">
+          <div class="timeline-item">
+            <div class="dot" aria-hidden="true"></div>
+            <strong>2024 — Started learning Data Engineering basics</strong>
+            <div class="small muted">Courses & hands-on practice in SQL & ETL</div>
+          </div>
+          <div class="timeline-item">
+            <div class="dot" aria-hidden="true"></div>
+            <strong>2024 — Began exploring RPA</strong>
+            <div class="small muted">Understanding automation workflows</div>
+          </div>
+          <div class="timeline-item">
+            <div class="dot" aria-hidden="true"></div>
+            <strong>2025 — Building small projects</strong>
+            <div class="small muted">Portfolio projects, practicing Git & cloud basics</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="section skills" aria-labelledby="skillsTitle">
+    <div class="container">
+      <h2 id="skillsTitle" class="section-title reveal">My Skills & Progress</h2>
+
+      <div class="skills-grid">
+        <div>
+          <div class="card reveal">
+            <h3>Core Skills</h3>
+            <div class="skill-list">
+              <div class="skill-item">
+                <div class="meta">SQL</div>
+                <div class="progress" data-percent="85"><i></i></div>
+              </div>
+              <div class="skill-item">
+                <div class="meta">ETL Concepts</div>
+                <div class="progress" data-percent="75"><i></i></div>
+              </div>
+              <div class="skill-item">
+                <div class="meta">Data Modelling</div>
+                <div class="progress" data-percent="65"><i></i></div>
+              </div>
+              <div class="skill-item">
+                <div class="meta">Python (Learning)</div>
+                <div class="progress" data-percent="55"><i></i></div>
+              </div>
+              <div class="skill-item">
+                <div class="meta">RPA (Learning)</div>
+                <div class="progress" data-percent="50"><i></i></div>
+              </div>
+            </div>
+
+            <div class="counters" aria-hidden="true">
+              <div class="counter"><div class="value" data-target="18">0</div><div class="small muted">Projects</div></div>
+              <div class="counter"><div class="value" data-target="12">0</div><div class="small muted">Certifications</div></div>
+              <div class="counter"><div class="value" data-target="120">0</div><div class="small muted">Learning Hours</div></div>
+            </div>
+          </div>
+
+          <div class="spacer"></div>
+
+          <div class="card reveal">
+            <h3>Tools & Platforms</h3>
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+              <span class="tag">GitHub</span>
+              <span class="tag">VS Code</span>
+              <span class="tag">MySQL</span>
+              <span class="tag">Postgres</span>
+              <span class="tag">Airflow (learning)</span>
+              <span class="tag">Linux basics</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- right column: Learning Resources -->
+        <div>
+          <div class="card reveal">
+            <h3>Learning Resources</h3>
+            <ul style="margin-top:10px; color:var(--muted);">
+              <li>Structured courses on SQL & ETL</li>
+              <li>Hands-on project practice</li>
+              <li>Documentation reading & community Q&A</li>
+              <li>Small automation experiments with RPA</li>
+            </ul>
+
+            <div class="spacer"></div>
+
+            <h4>What I'm focusing on now</h4>
+            <p class="small muted">Building small ETL pipelines, improving SQL performance, and integrating automation where it helps data flow.</p>
+          </div>
+
+          <div class="spacer"></div>
+
+          <div class="card reveal">
+            <h3>Learning Goals (next 6 months)</h3>
+            <ol style="margin-top:10px; color:var(--muted);">
+              <li>Complete 3 end-to-end ETL projects</li>
+              <li>Learn scheduling & orchestration (Airflow basics)</li>
+              <li>Practice cloud storage & basic compute</li>
+              <li>Prepare a polished portfolio with datasets & code</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects" class="section projects" aria-labelledby="projectsTitle">
+    <div class="container">
+      <h2 id="projectsTitle" class="section-title reveal">Projects & Demos</h2>
+
+      <div class="card reveal" style="padding:14px;">
+        <div class="projects-filters" role="toolbar" aria-label="Filter projects">
+          <button class="filter-btn" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="etl">ETL</button>
+          <button class="filter-btn" data-filter="automation">Automation</button>
+          <button class="filter-btn" data-filter="learning">Learning</button>
+        </div>
+
+        <div class="project-grid" id="projectGrid" style="margin-top:12px;">
+          <!-- Project 1 -->
+          <div class="project-card card reveal" data-type="etl">
+            <div class="project-cover" style="background-image:url('https://images.unsplash.com/photo-1581093588401-1fec7a0e1f0b?q=80&w=1400&auto=format&fit=crop');"></div>
+            <div class="project-content">
+              <h3>Sample ETL: CSV → Postgres</h3>
+              <div class="small muted">A simple pipeline that ingests CSV, transforms, and writes to Postgres (demo repo available)</div>
+              <div class="project-tags" aria-hidden="true">
+                <span class="tag">ETL</span><span class="tag">SQL</span><span class="tag">Postgres</span>
+              </div>
+              <div style="margin-top:10px;">
+                <button class="btn btn-outline openProject" data-title="Sample ETL: CSV → Postgres" data-desc="A small ETL demo showing ingestion & transformations.">View</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 2 -->
+          <div class="project-card card reveal" data-type="automation">
+            <div class="project-cover" style="background-image:url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1400&auto=format&fit=crop');"></div>
+            <div class="project-content">
+              <h3>RPA Experiment: Invoice Extraction</h3>
+              <div class="small muted">A learning project to extract invoice fields using automation workflows (proof-of-concept)</div>
+              <div class="project-tags">
+                <span class="tag">RPA</span><span class="tag">OCR (P.O.C.)</span>
+              </div>
+              <div style="margin-top:10px;">
+                <button class="btn btn-outline openProject" data-title="RPA Experiment: Invoice Extraction" data-desc="An RPA prototype for extracting invoice metadata.">View</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project 3 -->
+          <div class="project-card card reveal" data-type="learning">
+            <div class="project-cover" style="background-image:url('https://images.unsplash.com/photo-1515876305429-4f5b9d73f3d6?q=80&w=1400&auto=format&fit=crop');"></div>
+            <div class="project-content">
+              <h3>Learning Notebook: SQL Performance</h3>
+              <div class="small muted">Notes and small experiments showing query optimisation techniques</div>
+              <div class="project-tags">
+                <span class="tag">SQL</span><span class="tag">Optimization</span>
+              </div>
+              <div style="margin-top:10px;">
+                <button class="btn btn-outline openProject" data-title="Learning Notebook: SQL Performance" data-desc="Practical experiments to learn SQL performance">View</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- More project cards (repeated to make UI fuller) -->
+          <div class="project-card card reveal" data-type="learning">
+            <div class="project-cover" style="background-image:url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1400&auto=format&fit=crop');"></div>
+            <div class="project-content">
+              <h3>Dataset Exploration — Sales Data</h3>
+              <div class="small muted">Exploratory data analysis to practice data cleaning & aggregation</div>
+              <div class="project-tags"><span class="tag">EDA</span><span class="tag">Pandas (learning)</span></div>
+              <div style="margin-top:10px;"><button class="btn btn-outline openProject" data-title="Dataset Exploration — Sales Data" data-desc="EDA notes and outputs">View</button></div>
+            </div>
+          </div>
+
+          <div class="project-card card reveal" data-type="etl">
+            <div class="project-cover" style="background-image:url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1400&auto=format&fit=crop');"></div>
+            <div class="project-content">
+              <h3>Small pipeline: JSON → DB</h3>
+              <div class="small muted">Parsing JSON logs and storing structured data</div>
+              <div class="project-tags"><span class="tag">ETL</span><span class="tag">JSON</span></div>
+              <div style="margin-top:10px;"><button class="btn btn-outline openProject" data-title="Small pipeline: JSON → DB" data-desc="Log parsing demo">View</button></div>
+            </div>
+          </div>
+
+          <div class="project-card card reveal" data-type="automation">
+            <div class="project-cover" style="background-image:url('https://images.unsplash.com/photo-1526378728076-6d6f2e9b4f2e?q=80&w=1400&auto=format&fit=crop');"></div>
+            <div class="project-content">
+              <h3>Automation: Report Generation</h3>
+              <div class="small muted">Automating routine report assembly and delivery</div>
+              <div class="project-tags"><span class="tag">Automation</span><span class="tag">Reports</span></div>
+              <div style="margin-top:10px;"><button class="btn btn-outline openProject" data-title="Automation: Report Generation" data-desc="Automation workflow demo">View</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Project modal -->
+  <div class="modal" id="projectModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" id="modalClose" aria-label="Close modal">✕</button>
+      <h3 id="modalTitle">Project Title</h3>
+      <p id="modalDesc" class="small muted">Project description will appear here.</p>
+      <div style="margin-top:12px;"><a id="modalRepo" href="#" target="_blank" class="btn btn-primary">Open Repo / Demo</a></div>
+    </div>
+  </div>
+
+  <!-- ACHIEVEMENTS / CERTIFICATES -->
+  <section id="achievements" class="section achievements" aria-labelledby="achTitle">
+    <div class="container">
+      <h2 id="achTitle" class="section-title reveal">Certificates & Achievements</h2>
+
+      <div class="achievements-grid reveal">
+        <div class="card">
+          <h3>Certificates Folder</h3>
+          <p class="small muted">All my certificates are available in the Google Drive folder linked below. This opens in a new tab.</p>
+          <div class="spacer"></div>
+          <div class="certificate-list">
+            <div class="cert-item">
+              <div>
+                <strong>Combined Certificates Folder</strong>
+                <div class="small muted">Click to open Google Drive (new tab)</div>
+              </div>
+              <div>
+                <a class="cert-btn" href="https://drive.google.com/drive/folders/1B1S5jBWb7l0hTDAOhynBXS_VDH_yA4UA?usp=drive_link" target="_blank" rel="noopener noreferrer">Open Drive</a>
+              </div>
+            </div>
+
+            <div class="cert-item">
+              <div>
+                <strong>Google Drive Link</strong>
+                <div class="small muted">You can also copy the folder link</div>
+              </div>
+              <div>
+                <button class="cert-btn" id="copyDriveLink">Copy Link</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="embed-hint">Note: Drive sometimes prevents embedding; opening the folder in a new tab is the most reliable way to view all certificates.</div>
+        </div>
+
+        <div class="card">
+          <h3>Highlights</h3>
+          <ul style="color:var(--muted); margin-top:10px;">
+            <li>Hackathon participation — automation ideas & prototypes</li>
+            <li>Course certificates: SQL, Data Concepts, RPA fundamentals</li>
+            <li>Project badges & course completion certificates stored in Drive</li>
+          </ul>
+          <div class="spacer"></div>
+          <div>
+            <a class="btn btn-outline" href="https://drive.google.com/drive/folders/1B1S5jBWb7l0hTDAOhynBXS_VDH_yA4UA?usp=drive_link" target="_blank">View Certificates</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="timeline" aria-labelledby="timelineTitle">
+    <div class="container">
+      <h2 id="timelineTitle" class="section-title reveal">Learning Timeline</h2>
+      <div class="card reveal">
+        <div class="timeline-list">
+          <div class="timeline-item">
+            <div class="dot" aria-hidden="true"></div>
+            <strong>Started with fundamentals</strong>
+            <div class="small muted">Basics of programming, SQL and data handling.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="dot" aria-hidden="true"></div>
+            <strong>First ETL experiment</strong>
+            <div class="small muted">Simple data pipeline to move CSV data into a database.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="dot" aria-hidden="true"></div>
+            <strong>Automation learning</strong>
+            <div class="small muted">Tried RPA tools for automation of simple tasks.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="dot" aria-hidden="true"></div>
+            <strong>Portfolio building</strong>
+            <div class="small muted">Collecting projects & certificates for future roles.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials" aria-labelledby="testTitle">
+    <div class="container">
+      <h2 id="testTitle" class="section-title reveal">Feedback & Notes</h2>
+
+      <div class="test-grid reveal">
+        <div class="testimonial">
+          <strong>Hackathon Mentor</strong>
+          <div class="small muted">"Devanshu showed enthusiasm and delivered a clear prototype." — Mentor</div>
+        </div>
+        <div class="testimonial">
+          <strong>Course Instructor</strong>
+          <div class="small muted">"Consistent learner, actively engages with concepts." — Instructor</div>
+        </div>
+        <div class="testimonial">
+          <strong>Peer</strong>
+          <div class="small muted">"Collaborative on small projects and always improving." — Peer</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="section contact" aria-labelledby="contactTitle">
+    <div class="container">
+      <h2 id="contactTitle" class="section-title reveal">Get In Touch</h2>
+
+      <div class="contact-grid">
+        <div class="card reveal contact-details">
+          <h3>Contact info</h3>
+          <p class="small muted">I'm open to guidance, mentorship, and entry-level opportunities to learn and contribute as a Data Engineer.</p>
+
+          <div style="margin-top:12px;">
+            <div class="small muted">Email</div>
+            <div><a href="mailto:devanshujangid160@gmail.com">devanshujangid160@gmail.com</a></div>
+          </div>
+
+          <div style="margin-top:12px;">
+            <div class="small muted">Phone</div>
+            <div><a href="tel:+917976576712">+91 79765 76712</a></div>
+          </div>
+
+          <div style="margin-top:12px;">
+            <div class="small muted">Profiles</div>
+            <div style="display:flex; gap:12px; margin-top:8px;">
+              <a class="tag" href="https://linkedin.com/in/devanshu-jangid-6066b4321" target="_blank">LinkedIn</a>
+              <a class="tag" href="https://github.com/DEVANSHU362" target="_blank">GitHub</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card reveal contact-form">
+          <h3>Message me</h3>
+          <form id="contactForm" onsubmit="return false;" aria-label="Contact form">
+            <label for="name">Name</label>
+            <input id="name" class="input" placeholder="Your name" required>
+
+            <label for="email">Email</label>
+            <input id="email" class="input" placeholder="your@mail.com" required>
+
+            <label for="message">Message</label>
+            <textarea id="message" placeholder="Your message"></textarea>
+
+            <div style="display:flex; gap:10px; margin-top:10px;">
+              <button class="btn btn-primary" id="sendBtn">Send (demo)</button>
+              <button class="btn btn-outline" id="clearBtn" type="button">Clear</button>
+            </div>
+
+            <div id="formStatus" style="margin-top:12px; color:var(--muted); font-size:0.95rem;"></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer role="contentinfo">
+    <div class="container">
+      <p class="footer-text">© 2025 Devanshu Jangid. All rights reserved. — Aspiring Data Engineer</p>
+    </div>
+  </footer>
+
+  <!-- Project Modal (already in DOM) included earlier -->
+
+  <script>
+    /*************************************************************************
+     * Small interactive JS controlling:
+     *  - header scroll
+     *  - reveal on scroll
+     *  - progress bars animation
+     *  - counters animation
+     *  - project modal open/close
+     *  - mobile menu toggle
+     *  - simple project filters
+     *  - copy to clipboard (email & drive link)
+     *  - demo contact form (client-side only)
+     *************************************************************************/
+
+    // Header scroll effect
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Reveal on scroll (IntersectionObserver)
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('active');
+      });
+    }, { threshold: 0.12 });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Progress bar animation (on reveal)
+    const progressBars = document.querySelectorAll('.progress');
+    progressBars.forEach(pb => {
+      const percent = pb.getAttribute('data-percent') || 0;
+      const inner = pb.querySelector('i');
+      // wait until element visible (simple observer)
+      const obs = new IntersectionObserver((entries, ob) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            inner.style.width = percent + '%';
+            ob.unobserve(pb);
+          }
+        });
+      }, { threshold: 0.25 });
+      obs.observe(pb);
+    });
+
+    // Counters animation
+    const counters = document.querySelectorAll('.counter .value');
+    counters.forEach(counter => {
+      const target = +counter.getAttribute('data-target') || 0;
+      const obs = new IntersectionObserver((entries, ob) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            let current = 0;
+            const step = Math.max(1, Math.floor(target / 60));
+            const id = setInterval(() => {
+              current += step;
+              if (current >= target) {
+                counter.innerText = target;
+                clearInterval(id);
+              } else {
+                counter.innerText = current;
+              }
+            }, 16);
+            ob.unobserve(counter);
+          }
+        });
+      }, { threshold: 0.2 });
+      obs.observe(counter);
+    });
+
+    // Project modal open/close
+    const projectModal = document.getElementById('projectModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalDesc = document.getElementById('modalDesc');
+    const modalRepo = document.getElementById('modalRepo');
+    document.querySelectorAll('.openProject').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const title = btn.getAttribute('data-title');
+        const desc = btn.getAttribute('data-desc');
+        modalTitle.innerText = title;
+        modalDesc.innerText = desc;
+        modalRepo.href = "#"; // placeholder, add real repo link if available
+        projectModal.classList.add('active');
+        projectModal.setAttribute('aria-hidden', 'false');
+      });
+    });
+    document.getElementById('modalClose').addEventListener('click', () => {
+      projectModal.classList.remove('active');
+      projectModal.setAttribute('aria-hidden', 'true');
+    });
+    projectModal.addEventListener('click', (e) => {
+      if (e.target === projectModal) {
+        projectModal.classList.remove('active');
+        projectModal.setAttribute('aria-hidden','true');
+      }
+    });
+
+    // Mobile menu open/close
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileClose = document.getElementById('mobileClose');
+    mobileToggle.addEventListener('click', () => {
+      const open = mobileMenu.style.display !== 'none';
+      mobileMenu.style.display = 'block';
+      mobileToggle.setAttribute('aria-expanded', 'true');
+    });
+    mobileClose.addEventListener('click', () => {
+      mobileMenu.style.display = 'none';
+      mobileToggle.setAttribute('aria-expanded', 'false');
+    });
+    document.querySelectorAll('.mobile-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.style.display = 'none';
+        mobileToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Project filters
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const filter = btn.getAttribute('data-filter');
+        document.querySelectorAll('#projectGrid .project-card').forEach(card => {
+          if (filter === 'all' || card.getAttribute('data-type') === filter) {
+            card.style.display = '';
+            card.classList.add('active');
+          } else {
+            card.style.display = 'none';
+            card.classList.remove('active');
+          }
+        });
+      });
+    });
+
+    // Copy email to clipboard (demo)
+    document.getElementById('copyEmailBtn').addEventListener('click', async () => {
+      const email = 'devanshujangid160@gmail.com';
+      try {
+        await navigator.clipboard.writeText(email);
+        const prev = document.getElementById('formStatus');
+        if (prev) prev.innerText = 'Email copied to clipboard!';
+        // small visual feedback
+        document.getElementById('copyEmailBtn').innerText = 'Copied ✓';
+        setTimeout(() => document.getElementById('copyEmailBtn').innerText = 'Copy Email', 2000);
+      } catch (err) {
+        alert('Unable to copy. Please copy manually: ' + email);
+      }
+    });
+
+    // Copy Drive link
+    document.getElementById('copyDriveLink').addEventListener('click', async () => {
+      const link = 'https://drive.google.com/drive/folders/1B1S5jBWb7l0hTDAOhynBXS_VDH_yA4UA?usp=drive_link';
+      try {
+        await navigator.clipboard.writeText(link);
+        alert('Drive link copied to clipboard');
+      } catch (err) {
+        prompt('Copy this link:', link);
+      }
+    });
+
+    // Contact form demo actions
+    document.getElementById('clearBtn').addEventListener('click', () => {
+      document.getElementById('name').value = '';
+      document.getElementById('email').value = '';
+      document.getElementById('message').value = '';
+      document.getElementById('formStatus').innerText = 'Form cleared.';
+    });
+
+    document.getElementById('sendBtn').addEventListener('click', () => {
+      // This is a demo — no backend. We show a success message and clear fields.
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      if (!name || !email) {
+        document.getElementById('formStatus').innerText = 'Please enter your name and email.';
+        return;
+      }
+      document.getElementById('formStatus').innerText = 'Thank you! Message sent (demo).';
+      setTimeout(() => {
+        document.getElementById('name').value = '';
+        document.getElementById('email').value = '';
+        document.getElementById('message').value = '';
+      }, 800);
+    });
+
+    // Accessibility: close modal with Esc
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (projectModal.classList.contains('active')) {
+          projectModal.classList.remove('active');
+          projectModal.setAttribute('aria-hidden','true');
+        } else if (mobileMenu.style.display === 'block') {
+          mobileMenu.style.display = 'none';
+          mobileToggle.setAttribute('aria-expanded','false');
+        }
+      }
+    });
+
+    // Smooth scroll for nav links (already present but ensure mobile links also)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (!href || href === '#') return;
+        if (href.startsWith('#')) {
+          e.preventDefault();
+          const el = document.querySelector(href);
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    // Ensure elements that should be hidden initially are set when JS available
+    document.addEventListener('DOMContentLoaded', () => {
+      // hide mobile menu by default
+      mobileMenu.style.display = 'none';
+
+      // set initial progress widths to 0 (then observer animates them)
+      document.querySelectorAll('.progress i').forEach(i => i.style.width = '0%');
+
+      // counters initial 0 (already set)
+      document.querySelectorAll('.counter .value').forEach(v => v.innerText = '0');
+    });
+
+  </script>
+</body>
+</html>
